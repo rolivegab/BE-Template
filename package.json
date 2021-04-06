@@ -9,10 +9,17 @@
     "sqlite3": "^5.0.2"
   },
   "scripts": {
-    "start": "nodemon ./src/server.js",
-    "seed": "node ./scripts/seedDb.js"
+    "babel-node": "babel-node --presets='@babel/preset-env'",
+    "start": "nodemon --exec npm run babel-node -- ./src/server.js",
+    "seed": "npm run babel-node -- ./scripts/seedDb.js",
+    "build": "babel src -d lib"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/node": "^7.13.13",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
     "nodemon": "^2.0.7"
   },
   "engines": {

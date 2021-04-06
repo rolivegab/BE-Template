@@ -1,4 +1,7 @@
-const { Profile, Contract, Job } = require('../src/model');
+import { Contract } from "../src/models/Contract";
+import { Job } from "../src/models/Job";
+import { Profile } from "../src/models/Profile";
+import '../src/service/associations'
 
 /* WARNING THIS WILL DROP THE CURRENT DATABASE */
 seed();
