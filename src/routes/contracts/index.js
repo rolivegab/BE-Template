@@ -3,12 +3,12 @@ import { Op } from "sequelize";
 import { Contract } from "../../models/Contract";
 
 export const contractsRoute = Router("/")
-  .get("/:id", async (req, res) => {
-    const { id } = req.params;
+  .get("/:contractId", async (req, res) => {
+    const { contractId } = req.params;
     const { id: profileId } = req.profile;
     const contract = await Contract.findOne({
       where: {
-        id,
+        id: contractId,
         [Op.or]: [{ ClientId: profileId }, { ContractorId: profileId }],
       },
     });
