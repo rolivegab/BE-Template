@@ -1,9 +1,8 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const {sequelize} = require('./model')
-const {getProfile} = require('./middleware/getProfile')
-const app = express();
-app.use(bodyParser.json());
+import express from 'express';
+import {sequelize} from './model';
+import {getProfile} from './middleware/getProfile';
+
+export const app = express();
 app.set('sequelize', sequelize)
 app.set('models', sequelize.models)
 
@@ -18,4 +17,3 @@ app.get('/contracts/:id',getProfile ,async (req, res) =>{
     if(!contract) return res.status(404).end()
     res.json(contract)
 })
-module.exports = app;
