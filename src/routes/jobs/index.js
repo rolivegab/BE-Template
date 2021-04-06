@@ -25,6 +25,7 @@ export const jobsRoute = Router("/")
   .post("/:jobId/pay", async (req, res) => {
     const { jobId } = req.params;
     const profile = req.profile;
+    console.log('p', profile)
     const job = await Job.findOne({
       id: jobId,
       paid: false,
@@ -44,6 +45,7 @@ export const jobsRoute = Router("/")
           const paidJob = await Job.update(
             {
               paid: true,
+              paymentDate: new Date().toISOString()
             },
             {
               where: {

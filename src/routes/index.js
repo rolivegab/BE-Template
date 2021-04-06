@@ -1,10 +1,13 @@
 import { Router } from "express";
 import { getProfile } from "../middleware/getProfile";
+import { adminRoute } from "./admin";
 import { balancesRoute } from "./balances";
 import { contractsRoute } from "./contracts";
 import { jobsRoute } from "./jobs";
 
 export const routes = Router("/")
-  .use("/contracts", getProfile, contractsRoute)
-  .use('/jobs', getProfile, jobsRoute)
-  .use('/balances', getProfile, balancesRoute);
+  .use(getProfile)
+  .use("/contracts", contractsRoute)
+  .use('/jobs', jobsRoute)
+  .use('/balances', balancesRoute)
+  .use('/admin', adminRoute);
