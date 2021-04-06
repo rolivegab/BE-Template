@@ -35,4 +35,34 @@ export const adminRoute = Router("/")
     res.json(
       jobsByProfession?.[0]?.Contract?.Contractor?.profession ?? false
     );
+  })
+  .get("/best-clients", async (req, res) => {
+    const start = new Date(req.query.start);
+    const end = new Date(req.query.end);
+    const jobsByProfession = await Profile.findAll({
+      attributes: [
+        "Profile.*",
+        [sequelize.fn("sum", sequelize.col("balance")), "amount"],
+      ],
+      group: ["Profile.id"],
+      limit: 2,
+      include: {
+        model: Contract,
+        foreignKey: "ClientId",
+        as: "Client",
+        include: {
+          model: Job,
+          where: {
+            paymentDate: {
+              [Op.gte]: start.toISOString(),
+              [Op.lt]: end.toISOString(),
+            },
+          },
+          required: true,
+        },
+        required: true,
+      },
+      order: [["balance", "desc"]],
+    });
+    res.json(jobsByProfession);
   });
