@@ -1,3 +1,5 @@
+import Sequelize from "sequelize";
+import { sequelize } from "../service/sequelize";
 import { Contract } from "./Contract";
 
 export class Profile extends Sequelize.Model {}
@@ -27,6 +29,3 @@ Profile.init(
     modelName: 'Profile'
   }
 );
-
-Profile.hasMany(Contract, {as :'Contractor',foreignKey:'ContractorId'})
-Profile.hasMany(Contract, {as : 'Client', foreignKey:'ClientId'})

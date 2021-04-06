@@ -1,3 +1,5 @@
+import Sequelize from "sequelize";
+import { sequelize } from "../service/sequelize";
 import { Job } from "./Job";
 import { Profile } from "./Profile";
 
@@ -17,7 +19,3 @@ Contract.init(
     modelName: 'Contract'
   }
 );
-
-Contract.belongsTo(Profile, {as: 'Contractor'})
-Contract.belongsTo(Profile, {as: 'Client'})
-Contract.hasMany(Job)

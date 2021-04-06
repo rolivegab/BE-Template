@@ -1,6 +1,7 @@
 import express from 'express';
-import {sequelize} from './model';
 import {getProfile} from './middleware/getProfile';
+import { sequelize } from './service/sequelize';
+import './service/associations';
 
 export const app = express();
 app.set('sequelize', sequelize)

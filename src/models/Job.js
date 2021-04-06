@@ -1,3 +1,5 @@
+import Sequelize from "sequelize";
+import { sequelize } from "../service/sequelize";
 import { Contract } from "./Contract";
 
 export class Job extends Sequelize.Model {}
@@ -24,5 +26,3 @@ Job.init(
     modelName: 'Job'
   }
 );
-
-Job.belongsTo(Contract)
