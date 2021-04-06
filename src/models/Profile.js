@@ -1,31 +1,30 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../service/sequelize";
-import { Contract } from "./Contract";
 
 export class Profile extends Sequelize.Model {}
 Profile.init(
   {
     firstName: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     lastName: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     profession: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    balance:{
-      type:Sequelize.DECIMAL(12,2)
+    balance: {
+      type: Sequelize.DECIMAL(12, 2),
     },
     type: {
-      type: Sequelize.ENUM('client', 'contractor')
-    }
+      type: Sequelize.ENUM("client", "contractor"),
+    },
   },
   {
     sequelize,
-    modelName: 'Profile'
+    modelName: "Profile",
   }
 );

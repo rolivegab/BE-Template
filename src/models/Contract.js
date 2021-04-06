@@ -1,21 +1,19 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../service/sequelize";
-import { Job } from "./Job";
-import { Profile } from "./Profile";
 
 export class Contract extends Sequelize.Model {}
 Contract.init(
   {
     terms: {
       type: Sequelize.TEXT,
-      allowNull: false
+      allowNull: false,
     },
-    status:{
-      type: Sequelize.ENUM('new','in_progress','terminated')
-    }
+    status: {
+      type: Sequelize.ENUM("new", "in_progress", "terminated"),
+    },
   },
   {
     sequelize,
-    modelName: 'Contract'
+    modelName: "Contract",
   }
 );
