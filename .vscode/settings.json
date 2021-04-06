@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:BE-Template}/database.sqlite3",
+            "name": "asd"
+        }
+    ]
+}

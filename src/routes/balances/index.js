@@ -26,11 +26,13 @@ export const balancesRoute = Router("/").post(
         });
         const maxDeposit = priceSum * 0.25;
         if (amount > maxDeposit) {
-          return res.status(400).send("max deposit amount is " + maxDeposit.toFixed(2));
+          return res
+            .status(400)
+            .send("max deposit amount is " + maxDeposit.toFixed(2));
         }
 
         profile.balance = (profile.balance ?? 0) + amount;
-        await profile.save({transaction})
+        await profile.save({ transaction });
         res.json(profile);
       }
     );
