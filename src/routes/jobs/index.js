@@ -23,7 +23,7 @@ export const jobsRoute = Router("/")
     res.json(jobs);
   })
   .post("/:jobId/pay", async (req, res) => {
-    const {jobId} = req.params
+    const { jobId } = req.params;
     const profile = req.profile;
     const job = await Job.findOne({
       id: jobId,
@@ -35,24 +35,30 @@ export const jobsRoute = Router("/")
           status: "in_progress",
         },
         required: true,
-      }
+      },
     });
-    await sequelize.transaction({isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE}, async (transaction) => {
-      if (profile.balance >= job.price) {
-        const paidJob = await Job.update({
-          paid: true,
-        }, {
-          where: {
-            id: jobId
-          },
-          transaction,
-        })
-        profile.balance = profile.balance - job.price;
-        await profile.save({transaction});
-  
-        res.json(true);
-      } else {
-        res.status(400).send('insufficient_balance')
+    await sequelize.transaction(
+      { isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE },
+      async (transaction) => {
+        if (profile.balance >= job.price) {
+          const paidJob = await Job.update(
+            {
+              paid: true,
+            },
+            {
+              where: {
+                id: jobId,
+              },
+              transaction,
+            }
+          );
+          profile.balance = profile.balance - job.price;
+          await profile.save({ transaction });
+
+          res.json(true);
+        } else {
+          res.status(400).send("insufficient_balance");
+        }
       }
-    });
+    );
   });
