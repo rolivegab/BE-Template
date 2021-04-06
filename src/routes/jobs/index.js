@@ -31,7 +31,7 @@ export const jobsRoute = Router("/")
       include: {
         model: Contract,
         where: {
-          [Op.or]: [{ ClientId: profile.id }, { ContractorId: profile.id }],
+          ClientId: profile.id,
           status: "in_progress",
         },
         required: true,
